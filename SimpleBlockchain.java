@@ -1,11 +1,16 @@
+import java.security.Security;
 import java.util.ArrayList;
-
+import java.util.Base64;
 public class SimpleBlockchain
 {
     public static int difficulty = 5;
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
+    public static Wallet walletA;
+    public static Wallet walletB;
     public static void main(String args[]){
 
+        walletA = new Wallet();
+        walletB = new Wallet();
         blockchain.add(new Block("Hi im the first block", "0"));
         System.out.println("Trying to Mine block 1... ");
 		blockchain.get(0).mineBlock(difficulty);
@@ -19,6 +24,16 @@ public class SimpleBlockchain
 		blockchain.get(2).mineBlock(difficulty);
 
         System.out.println("\nBlockchain is Valid: " + isChainValid(blockchain));
+
+        System.out.println("Private and public keys:");
+        System.out.println(StringUtil.getStringFromKey(walletA.privateKey));
+        System.out.println(StringUtil.getStringFromKey(walletA.publicKey));
+
+        Transaction transaction = new Transaction(walletA.publicKey, walletB.publickey, 10, null);
+        transaction.generateSignature(walletA.privateKey);
+
+        System.out.println("Is signature verified");
+        System.out.println(transaction.verifiySignature());
 
     }
 
