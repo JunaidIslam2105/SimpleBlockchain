@@ -29,7 +29,7 @@ public class SimpleBlockchain
         System.out.println(StringUtil.getStringFromKey(walletA.privateKey));
         System.out.println(StringUtil.getStringFromKey(walletA.publicKey));
 
-        Transaction transaction = new Transaction(walletA.publicKey, walletB.publickey, 10, null);
+        Transactions transaction = new Transactions(walletA.publicKey, walletB.publicKey, 10, null);
         transaction.generateSignature(walletA.privateKey);
 
         System.out.println("Is signature verified");
