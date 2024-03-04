@@ -1,5 +1,5 @@
+import java.security.*;
 import java.security.MessageDigest;
-import java.security.Signature;
 import java.util.Base64;
 
 public class StringUtil
@@ -40,10 +40,12 @@ public class StringUtil
             dsa.update(strByte);
             byte[] realSig = dsa.sign();
             output = realSig;
+
+            return output;
         }
         catch(Exception e)
         {
-            throw new RuntimeException(e)
+            throw new RuntimeException(e);
         }
     }
     public static boolean verifyECDSASig(PublicKey publicKey, String data, byte[] signature)
