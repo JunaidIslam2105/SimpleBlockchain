@@ -14,12 +14,12 @@ public class Wallet {
    public void generateKeyPair()
    {
        try {
-           KeyPairGenerator keygen = keyPairGenerator.getInstance("ECDSA","BC");
-           SecureRandom random = SecureRandom.getInstance(SHA1PRNG);
+           KeyPairGenerator keygen = KeyPairGenerator.getInstance("ECDSA","BC");
+           SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
            ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
 
            keygen.initialize((ecSpec,random));
-           keyPair keyPair = keygen.generateKeyPair();
+           KeyPair keyPair = keygen.generateKeyPair();
 
            privateKey = keyPair.getPrivate();
            publicKey = keyPair.getPublic();
